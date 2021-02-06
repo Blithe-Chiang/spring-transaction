@@ -9,6 +9,8 @@ import com.example.service.BuyGoodsService;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @Setter
@@ -18,6 +20,9 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
     @Autowired
     SaleDao saleDao;
 
+    //给业务层方法加入事务属性
+    @Transactional(propagation = Propagation.REQUIRED,
+            rollbackFor = {NotEnoughException.class, NullPointerException.class})
     @Override
     public void buy(Integer goodsId, Integer amount) {
         Sale sale = new Sale();
@@ -29,7 +34,7 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
             throw new NullPointerException("无此商品");
         }
         if (goods.getAmount() < amount) {
-            throw new NotEnoughException("库存不够: 剩余" + goods.getAmount() + ", 需要" + amount);
+            throw new NotEnoughException("库存不够: 剩余-" + goods.getAmount() + ", 需要-" + amount);
         }
         goods = new Goods();
         goods.setAmount(amount);

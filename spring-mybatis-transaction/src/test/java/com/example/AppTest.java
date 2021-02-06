@@ -4,7 +4,6 @@ import com.example.dao.GoodsDao;
 import com.example.dao.SaleDao;
 import com.example.domain.Sale;
 import com.example.service.BuyGoodsService;
-import com.example.service.impl.BuyGoodsServiceImpl;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -33,8 +32,8 @@ public class AppTest {
     @Test
     public void testService() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
-        BuyGoodsService buyGoodsService = ctx.getBean(BuyGoodsServiceImpl.class);
-        buyGoodsService.buy(1002, 2);
+        BuyGoodsService buyGoodsService = (BuyGoodsService) ctx.getBean(BuyGoodsService.class);
+        buyGoodsService.buy(1001, 10000);
     }
 
     /**
