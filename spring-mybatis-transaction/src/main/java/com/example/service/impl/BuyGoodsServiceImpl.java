@@ -7,10 +7,15 @@ import com.example.domain.Sale;
 import com.example.exceptions.NotEnoughException;
 import com.example.service.BuyGoodsService;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 @Setter
 public class BuyGoodsServiceImpl implements BuyGoodsService {
+    @Autowired
     GoodsDao goodsDao;
+    @Autowired
     SaleDao saleDao;
 
     @Override
