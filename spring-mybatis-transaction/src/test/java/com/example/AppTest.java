@@ -1,6 +1,8 @@
 package com.example;
 
 import com.example.dao.GoodsDao;
+import com.example.service.BuyGoodsService;
+import com.example.service.impl.BuyGoodsServiceImpl;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -24,5 +26,12 @@ public class AppTest {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
         GoodsDao goodsDao = ctx.getBean(GoodsDao.class);
         System.out.println(goodsDao);
+    }
+
+    @Test
+    public void testService() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
+        BuyGoodsService buyGoodsService = ctx.getBean(BuyGoodsServiceImpl.class);
+        buyGoodsService.buy(1002, 2);
     }
 }
